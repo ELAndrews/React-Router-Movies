@@ -20,6 +20,9 @@ const App = () => {
       component={MovieList} />
       <Route 
       path="/movies/:id"
+      render={(props) => (
+        <Movie {...props} />
+      )}
       component={Movie} />
       {/* <div>Replace this Div with your Routes</div> */}
     </div>
