@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 
 
 const MovieCard = props => {
@@ -34,8 +34,14 @@ const MovieCard = props => {
           ))}
 
         </div>
-            <div className="save-button" onClick={handleClick}>Save</div>
-
+            <Route 
+            exact path={`/movies/${movie.id}`}
+            render={() => {
+              return (
+                <div className="save-button" onClick={handleClick}>Save</div>
+              )
+            }} />
+         
         </div>
       </Link>
     );
