@@ -3,8 +3,10 @@ import axios from 'axios';
 import MovieCard from './MovieCard';
 
 const Movie = (props) => {
+  
   const [movie, setMovie] = useState({stars: []});
- 
+  const [error, setError] = useState(null);
+  
   useEffect(() => {
   
     const id = props.match.params.id;
@@ -17,42 +19,26 @@ const Movie = (props) => {
           setMovie(response.data);
         })
         .catch(error => {
-          console.error(error);
+          setError(error.message);
         });
 
   },[]);
-
-  
-  class Event extends React.Component {
-    constructor (props) {
-      super(props);
-      this.state = {};
-      this.handleClick = this.handleClick.bind(this);
-    }
-  
-    handleClick(e) {
-      e.preventDefault();
-      console.log(`event happened`);
-      this.addToSavedList(this.movie);
-    }}
-  
   
   // Uncomment this only when you have moved on to the stretch goals
-  // const saveMovie = (props) => {
-  //   const addToSavedList = props.addToSavedList();
-  //   addToSavedList(movie)
-  // }
-  
+  const saveMovie = () => {
+    const addToSavedList = props.addToSavedList;
+    addToSavedList(movie)
+  }
+
   if (!movie) {
     return <div>Loading movie information...</div>;
   }
   return (
     <div>
-      <MovieCard movie={movie} />
+      {error && <p>{error}</p>}
+      <MovieCard movie={movie} saveMovie={saveMovie}/>
     </div>
   )
 }
-
-
 
 export default Movie;

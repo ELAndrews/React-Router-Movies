@@ -1,9 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 
 const MovieCard = props => {
+
   const movie = props.movie;
+  const saveMovie = props.saveMovie;
+  
+    function handleClick(e) {
+      e.preventDefault();
+      saveMovie(movie);
+    }
+
 
     return (
       <Link 
@@ -26,7 +34,8 @@ const MovieCard = props => {
           ))}
 
         </div>
-            <div className="save-button">Save</div>
+            <div className="save-button" onClick={handleClick}>Save</div>
+
         </div>
       </Link>
     );
